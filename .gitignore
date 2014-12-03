@@ -4,6 +4,9 @@
 # Bundler
 bin/*
 .bundle/*
+Gemfile.lock
+vendor/
 
 .kitchen/
 .kitchen.local.yml
+
