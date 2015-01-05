@@ -1,2 +1,50 @@
-Vagrant + Chef でサーバー構成管理をやってみるの巻
+Vagrant + Chef でサーバー構成管理をやってみるの巻  
 Trying provisioning by Vagrant and Chef.
+
+# Setup
+
+## Clone Repository
+
+```
+% git clone https://github.com/masayuki14/cent-chef.git ~/Machines/cent-chef
+% cd ~/Machines/cent-chef
+```
+
+### VagrantでVMを起動
+
+ ```
+% vagrant up
+```
+
+### SSHの設定
+
+`vgchef`という名前でSSHの設定を追加する。設定後はホスト名としてコマンドなどで使用する。`% ssh vgchef`でSSHなど。
+```
+% vagrant ssh-config --host vgchef >> ~/.ssh/config
+```
+
+## Chefのセットアップ
+
+### knife-soloのインストール
+
+`Bundler`を使ってインストールする。ない場合はRuby(2.0以上がいい)をインストールする。  
+`Bundler`でインストールする場合`knife`コマンドを使う際には`bundle exec knife`のように頭に`bundle exec`が常につく。  
+`Bundler`を使わない場合は直接`gem`でインストールする。
+初期化ではすべてEnterでよい。
+
+```
+% bundle install --path vendor/bundle
+
+# gemで直接インストールする場合
+# 必要に応じて sudo をつける
+% gem install knife-solo --pre
+
+# 続けてknifeの初期化
+% bundle exec knife configure
+```
+
+### VM(ノード)にChefSoloを入れる
+
+```
+% bundle exec knife solo prepare vgchef
+```
