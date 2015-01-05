@@ -1,6 +1,8 @@
 {
   "run_list": [
-
+    //"recipe[apt]",
+    "recipe[base_packages]",
+    "recipe[nginx]"
   ],
   "automatic": {
     "ipaddress": "vgchef"
