@@ -1,6 +1,8 @@
 {
+  "nginx": {
+    "port": 80
+  },
   "run_list": [
-    //"recipe[apt]",
     "recipe[base_packages]",
     "recipe[iptables]",
     "recipe[nginx]"
