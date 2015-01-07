@@ -5,7 +5,8 @@
   "run_list": [
     "recipe[base_packages]",
     "recipe[iptables]",
-    "recipe[nginx]"
+    "recipe[nginx]",
+    "recipe[php]"
   ],
   "automatic": {
     "ipaddress": "vgchef"
