@@ -9,11 +9,12 @@
 bash 'apt-get_update' do
   user 'root'
   code <<-EOS
+    apt-get update
   EOS
 end
 
 # basicなパッケージをインストールする
-%w{gcc make libxml2 git subversion apache2}.each do |pkg|
+%w{gcc make git subversion apache2}.each do |pkg|
   package pkg do
     action :install
   end
