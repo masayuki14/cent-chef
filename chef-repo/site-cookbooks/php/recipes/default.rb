@@ -32,10 +32,20 @@ bash 'install_phpbrew' do
   EOS
 end
 
-bash 'install_php54' do
+bash 'init_phpbrew' do
   user 'vagrant'
+  not_if 'grep "phpbrew/bashrc" ~/.bashrc'
   code <<-EOS
     phpbrew init
-    phpbrew install 5.4.36 +default
+    echo 'export PHPBREW_SET_PROMPT=1' >> ~/.bashrc
+    echo 'source ~/.phpbrew/bashrc' >> ~/.bashrc
+  EOS
+end
+
+bash 'install_php54' do
+  user 'vagrant'
+  not_if 'phpbrew list | grep "php-5.4.36"'
+  code <<-EOS
+    phpbrew install 5.4.36
   EOS
 end
