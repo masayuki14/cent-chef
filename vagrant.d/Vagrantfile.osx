@@ -13,6 +13,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # https://atlas.hashicorp.com/ubuntu/boxes/trusty64
   config.vm.box = "ubuntu/trusty64"
 
+  # For 'vagrant-cachier' plugins setting
+  if Vagrant.has_plugin? 'vagrant-cachier'
+    config.cache.scope = :box
+  end
+
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.

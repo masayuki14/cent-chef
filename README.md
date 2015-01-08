@@ -3,6 +3,12 @@ Trying provisioning by Vagrant and Chef.
 
 # Setup
 
+## Install vagrant plugin
+```
+% vagrant plugin install sahara
+% vagrant plugin install vagrant-cachier
+```
+
 ## Clone Repository
 
 ```
