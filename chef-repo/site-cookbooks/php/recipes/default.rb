@@ -47,5 +47,6 @@ bash 'install_php54' do
   not_if 'phpbrew list | grep "php-5.4.36"'
   code <<-EOS
     phpbrew install 5.4.36
+    phpbrew use 5.4.36
   EOS
 end
