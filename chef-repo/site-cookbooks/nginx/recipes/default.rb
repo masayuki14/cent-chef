@@ -12,7 +12,7 @@ end
 
 # nginx の起動
 service 'nginx' do
-  action [ :enable, :start ]
+  action [ :disable, :stop ]
 end
 
 # 設定ファイルの設置

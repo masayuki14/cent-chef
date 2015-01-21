@@ -6,6 +6,7 @@
     "recipe[base_packages]",
     "recipe[iptables]",
     "recipe[nginx]",
+    "recipe[apache2]",
     "recipe[php]"
   ],
   "automatic": {

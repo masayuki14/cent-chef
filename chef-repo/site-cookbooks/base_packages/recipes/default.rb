@@ -14,12 +14,8 @@ bash 'apt-get_update' do
 end
 
 # basicなパッケージをインストールする
-%w{gcc make git subversion apache2}.each do |pkg|
+%w{gcc make git subversion}.each do |pkg|
   package pkg do
     action :install
   end
-end
-
-service 'apache2' do
-  action [ :enable, :stop ]
 end
