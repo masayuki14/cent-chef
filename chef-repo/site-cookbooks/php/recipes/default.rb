@@ -22,13 +22,13 @@ end
 
 # phpbrewを使って5.4をインストールする
 bash 'install_phpbrew' do
-  not_if 'test -e /usr/bin/phpbrew'
+  not_if 'which phpbrew'
   cwd '/tmp'
   user 'root'
   code <<-EOS
     curl -L -O https://github.com/phpbrew/phpbrew/raw/master/phpbrew
     chmod +x phpbrew
-    mv phpbrew /usr/bin/phpbrew
+    mv phpbrew /usr/local/bin/phpbrew
   EOS
 end
 
@@ -37,7 +37,6 @@ bash 'init_phpbrew' do
   not_if 'grep "phpbrew/bashrc" ~/.bashrc'
   code <<-EOS
     phpbrew init
-    echo 'export PHPBREW_SET_PROMPT=1' >> ~/.bashrc
     echo 'source ~/.phpbrew/bashrc' >> ~/.bashrc
   EOS
 end
@@ -47,6 +46,9 @@ bash 'install_php54' do
   not_if 'phpbrew list | grep "php-5.4.36"'
   code <<-EOS
     phpbrew install 5.4.36
-    phpbrew use 5.4.36
   EOS
+end
+
+bash 'use_php54' do
+  code 'phpbrew use php-5.4.36'
 end
