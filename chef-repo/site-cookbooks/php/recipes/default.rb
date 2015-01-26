@@ -43,6 +43,7 @@ end
 
 bash 'install_php54' do
   user 'vagrant'
+  group 'vagrant'
   not_if 'phpbrew list | grep "php-5.4.36"'
   code <<-EOS
     phpbrew install 5.4.36
