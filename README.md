@@ -54,3 +54,16 @@ Trying provisioning by Vagrant and Chef.
 ```
 % bundle exec knife solo prepare vgchef
 ```
+
+### VMでサーバープロビジョニング
+
+```
+% cd chef-repo
+% bundle exec knife solo cook vgchef
+```
+
+`bootstrap`を実行すると上記の`prepare` `cook` のどちらも実行してくれる。
+```
+% cd chef-repo
+% bundle exec knife solo bootstrap vgchef
+```
