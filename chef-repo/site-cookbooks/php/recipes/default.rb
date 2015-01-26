@@ -50,6 +50,7 @@ bash 'install_php54' do
 end
 
 bash 'use_php54' do
+  user 'vagrant'
   code 'phpbrew use php-5.4.36'
 end
 
@@ -74,6 +75,10 @@ end
 
 bash 'compser_install' do
   user 'vagrant'
+  group 'vagrant'
   cwd '/home/vagrant'
-  code 'composer install'
+  code <<-EOS
+    composer self-update
+    composer install
+  EOS
 end
