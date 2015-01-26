@@ -82,3 +82,11 @@ bash 'compser_install' do
     composer install
   EOS
 end
+
+# include path にZendを加える(Zend1系)
+execute 'link_installed_composer' do
+  not_if 'test -L /usr/share/php/Zend'
+  user 'root'
+  cwd '/usr/share/php'
+  command 'ln -s /home/vagrant/vendor/zendframework/zendframework1/library/Zend .'
+end
