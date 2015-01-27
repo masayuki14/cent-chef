@@ -33,17 +33,17 @@ service webServer do
 end
 
 # VirtualHost の設定ファイルを作成し有効化してリロード
-template 'dev.hybrid.adinte.jp.conf' do
-  path  '/etc/apache2/sites-available/dev.hybrid.adinte.jp.conf'
+template 'dev.hybrid.local.conf' do
+  path  '/etc/apache2/sites-available/dev.hybrid.local.conf'
   owner 'root'
-  notifies :run, 'execute[a2ensite_dev.hybrid.adinte.jp]'
+  notifies :run, 'execute[a2ensite_dev.hybrid.local]'
 
 end
 
-execute 'a2ensite_dev.hybrid.adinte.jp' do
+execute 'a2ensite_dev.hybrid.local' do
   action :nothing
   user 'root'
-  command 'a2ensite dev.hybrid.adinte.jp'
+  command 'a2ensite dev.hybrid.local'
   notifies :restart, 'service[apache2]'
 end
 
