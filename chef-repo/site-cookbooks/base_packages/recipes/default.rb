@@ -6,11 +6,11 @@
 #
 # All rights reserved - Do Not Redistribute
 
-bash 'apt-get_update' do
-  user 'root'
-  code <<-EOS
-    apt-get update
-  EOS
+if node[:platform] == 'ubuntu'
+  bash 'apt-get_update' do
+    user 'root'
+    code 'apt-get update'
+  end
 end
 
 # basicなパッケージをインストールする
