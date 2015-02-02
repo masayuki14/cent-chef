@@ -14,7 +14,7 @@ bash 'apt-get_update' do
 end
 
 # basicなパッケージをインストールする
-%w{gcc make git subversion}.each do |pkg|
+%w{gcc make git subversion git-svn}.each do |pkg|
   package pkg do
     action :install
   end
