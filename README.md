@@ -7,6 +7,7 @@ Trying provisioning by Vagrant and Chef.
 ```
 % vagrant plugin install sahara
 % vagrant plugin install vagrant-cachier
+% vagrant plugin install vagrant-omnibus
 ```
 
 ## Clone Repository
