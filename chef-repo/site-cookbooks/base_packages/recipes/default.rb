@@ -6,16 +6,28 @@
 #
 # All rights reserved - Do Not Redistribute
 
-bash 'apt-get_update' do
-  user 'root'
-  code <<-EOS
-    apt-get update
-  EOS
-end
-
-# basicなパッケージをインストールする
-%w{gcc make git subversion}.each do |pkg|
+def install(pkg)
   package pkg do
     action :install
   end
 end
+
+if node[:platform] == 'ubuntu'
+  bash 'apt-get_update' do
+    user 'root'
+    code 'apt-get update'
+  end
+end
+
+# basicなパッケージをインストールする
+case node[:platform]
+when  'centos'
+  %w[vim-enhanced].each do |pkg|
+    install pkg
+  end
+end
+
+%w{gcc make git subversion git-svn}.each do |pkg|
+  install pkg
+end
+
