@@ -6,6 +6,12 @@
 #
 # All rights reserved - Do Not Redistribute
 
+def install(pkg)
+  package pkg do
+    action :install
+  end
+end
+
 if node[:platform] == 'ubuntu'
   bash 'apt-get_update' do
     user 'root'
@@ -14,8 +20,14 @@ if node[:platform] == 'ubuntu'
 end
 
 # basicなパッケージをインストールする
-%w{gcc make git subversion git-svn}.each do |pkg|
-  package pkg do
-    action :install
+case node[:platform]
+when  'centos'
+  %w[vim-enhanced].each do |pkg|
+    install pkg
   end
 end
+
+%w{gcc make git subversion git-svn}.each do |pkg|
+  install pkg
+end
+
