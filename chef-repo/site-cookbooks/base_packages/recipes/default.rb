@@ -22,7 +22,7 @@ end
 # basicなパッケージをインストールする
 case node[:platform]
 when  'centos'
-  %w[vim-enhanced].each do |pkg|
+  %w[vim-enhanced screen].each do |pkg|
     install pkg
   end
 end
