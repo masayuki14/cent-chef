@@ -65,41 +65,4 @@ when 'ubuntu'
     code 'phpbrew use php-5.4.36'
   end
 
-  # compserをインストール
-  bash 'install_composer' do
-    user 'root'
-    cwd '/tmp'
-    not_if 'which composer'
-    code <<-EOS
-    curl -sS https://getcomposer.org/installer | php
-    sudo -s mv composer.phar /usr/local/bin/composer
-    EOS
-  end
-
-  # composerでZendframeworkをインストールする
-  template 'composer.json' do
-    path '/home/vagrant/composer.json'
-    owner 'vagrant'
-    group 'vagrant'
-    mode 0644
-  end
-
-  bash 'compser_install' do
-    user 'vagrant'
-    group 'vagrant'
-    cwd '/home/vagrant'
-    code <<-EOS
-    composer self-update
-    composer install
-    EOS
-  end
-
-  # include path にZendを加える(Zend1系)
-  execute 'link_installed_composer' do
-    not_if 'test -L /usr/share/php/Zend'
-    user 'root'
-    cwd '/usr/share/php'
-    command 'ln -s /home/vagrant/vendor/zendframework/zendframework1/library/Zend .'
-  end
-
 end
