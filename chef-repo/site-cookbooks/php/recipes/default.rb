@@ -33,36 +33,28 @@ when 'ubuntu'
   # phpbrewを使って5.4をインストールする
   bash 'install_phpbrew' do
     not_if 'which phpbrew'
-    cwd '/tmp'
-    user 'root'
+    cwd    '/tmp'
+    user   'root'
     code <<-EOS
-    curl -L -O https://github.com/phpbrew/phpbrew/raw/master/phpbrew
-    chmod +x phpbrew
-    mv phpbrew /usr/local/bin/phpbrew
+      curl -L -O https://github.com/phpbrew/phpbrew/raw/master/phpbrew
+      chmod +x phpbrew
+      mv phpbrew /usr/local/bin/phpbrew
     EOS
   end
 
   bash 'init_phpbrew' do
-    user 'vagrant'
     not_if 'grep "phpbrew/bashrc" ~/.bashrc'
+    user 'vagrant'
     code <<-EOS
-    phpbrew init
-    echo 'source ~/.phpbrew/bashrc' >> ~/.bashrc
+      phpbrew init
+      echo 'source ~/.phpbrew/bashrc' >> ~/.bashrc
     EOS
   end
 
   bash 'install_php54' do
-    user 'vagrant'
-    group 'vagrant'
     not_if 'phpbrew list | grep "php-5.4.36"'
-    code <<-EOS
-    phpbrew install 5.4.36
-    EOS
+    user   'vagrant'
+    group  'vagrant'
+    code   'phpbrew install 5.4.36'
   end
-
-  bash 'use_php54' do
-    user 'vagrant'
-    code 'phpbrew use php-5.4.36'
-  end
-
 end
