@@ -1,8 +1,29 @@
 {
-  "nginx": {
-    "port": 80
+  "yum": {
+    "remi": {
+      "enabled": true,
+      "managed": false
+    },
+    "remi-php55": {
+      "enabled": false,
+      "managed": false
+    },
+    "remi-php56": {
+      "enabled": false,
+      "managed": false
+    },
+    "remi-test": {
+      "enabled": false,
+      "managed": false
+    },
+    "epel": {
+      "enabled": true,
+      "managed": false
+    }
   },
   "run_list": [
+    "recipe[yum-epel]",
+    "recipe[yum-remi]",
     "recipe[base_packages]",
     "recipe[iptables]",
     "recipe[apache2]",
