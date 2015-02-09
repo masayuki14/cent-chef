@@ -39,7 +39,6 @@ when 'ubuntu'
   end
 end
 
-return 
 # basicなパッケージをインストールする
 case node[:platform]
 when  'centos'
