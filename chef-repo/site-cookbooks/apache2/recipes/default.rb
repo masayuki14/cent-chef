@@ -7,35 +7,30 @@
 # All rights reserved - Do Not Redistribute
 #
 
-web_server = nil
 case node[:platform]
-when 'ubuntu'
-  # Debian系はこっち
-  # とりあえず ubuntu サーバへのApacheインストールレシピ
-  web_server = 'apache2'
-
 when 'centos'
-  # Redhat系はこっち
-  web_server  = 'httpd'
-end
-return if web_server .nil?
+  package 'httpd' do
+    action :install
+  end
 
-package web_server do
-  action :install
-end
+  service 'httpd' do
+    action [ :enable, :start ]
+  end
 
-service web_server do
-  action [ :enable, :start ]
-end
-
-case node[:platform]
 when 'ubuntu'
+  package 'apache2' do
+    action :install
+  end
+
+  service 'apache2' do
+    action [ :enable, :start ]
+  end
+
   # VirtualHost の設定ファイルを作成し有効化してリロード
   template 'dev.hybrid.local.conf' do
     path     '/etc/apache2/sites-available/dev.hybrid.local.conf'
     owner    'root'
     notifies :run, 'execute[a2ensite_dev.hybrid.local]'
-
   end
 
   execute 'a2ensite_dev.hybrid.local' do
@@ -51,7 +46,4 @@ when 'ubuntu'
     command  'a2enmod rewrite'
     notifies :restart, 'service[apache2]'
   end
-
-when 'centos'
-
 end
