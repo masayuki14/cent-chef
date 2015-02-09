@@ -17,6 +17,13 @@ when 'centos'
     action [ :enable, :start ]
   end
 
+  # Virtualhost の設定をする
+  template 'cent.dev.hybrid.local.conf' do
+    path     '/etc/httpd/conf.d/dev.hybrid.local.conf'
+    owner    'root'
+    notifies :restart, 'service[httpd]'
+  end
+
 when 'ubuntu'
   package 'apache2' do
     action :install
