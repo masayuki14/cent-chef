@@ -9,7 +9,7 @@
 
 case node[:platform]
 when 'centos'
-  %w{php phpunit}.each do |pkg|
+  %w{php php-phpunit-PHPUnit}.each do |pkg|
     package pkg do
       action :install
     end
