@@ -7,8 +7,8 @@
 # All rights reserved - Do Not Redistribute
 #
 
-%w[redis php-redis].each do
-  package 'redis' do
+%w[redis php-redis].each do |pkg|
+  package pkg do
     action :install
   end
 end
