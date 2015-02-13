@@ -15,6 +15,29 @@ when 'centos'
     end
   end
 
+  # php.iniの設定
+  template 'php.ini' do
+    path     '/etc/php.ini'
+    owner    'root'
+    #notifies :restart, 'service[httpd]'
+  end
+
+  # error_log の設置
+  directory File.dirname(node['php']['error_log']) do
+    user     'root'
+    group    'root'
+    mode      0755
+    recursive true
+    action    :create
+  end
+
+  file node['php']['error_log'] do
+    owner  'root'
+    group  'root'
+    mode    0666
+    action  :create
+  end
+
 when 'ubuntu'
 
   %w{php5 phpunit}.each do |pkg|
