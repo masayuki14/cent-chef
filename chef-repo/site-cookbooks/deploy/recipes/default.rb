@@ -45,3 +45,14 @@ dir = '/home/vagrant/hybrid/htdocs/application/configs'
   content IO.read("#{dir}/redis.ini.sample")
   not_if  "test -f #{dir}/redis.ini"
 end
+
+# Redisデータのビルド
+bash 'build_word_category.php' do
+  cwd  '/home/vagrant/hybrid/app/script'
+  code 'php build_word_category.php'
+end
+
+bash 'build_word_sets.php' do
+  cwd  '/home/vagrant/hybrid/app/script'
+  code 'php build_word_sets.php'
+end
