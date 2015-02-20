@@ -13,13 +13,19 @@ Trying provisioning by Vagrant and Chef.
 ## Clone Repository
 
 ```
-% git clone https://github.com/masayuki14/cent-chef.git ~/Machines/cent-chef
+% git clone https://github.com/masayuki14/vagrant-chef.git ~/Machines/vagrant-chef
 % cd ~/Machines/cent-chef
+```
+
+### Vagrantfile作成
+```
+% cd ~/Machines/vagrant-chef
+% ln -s vagrant.d/Vagrantfile.osx Vagrantfile
 ```
 
 ### VagrantでVMを起動
 
- ```
+```
 % vagrant up
 ```
 
