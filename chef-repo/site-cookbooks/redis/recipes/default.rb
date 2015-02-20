@@ -11,6 +11,10 @@
   package pkg do
     action :install
   end
+
+  if pkg == 'php-redis'
+    notifies :restart, 'service[httpd]'
+  end
 end
 
 service 'redis' do

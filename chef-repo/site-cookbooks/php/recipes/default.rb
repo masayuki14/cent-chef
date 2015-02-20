@@ -19,7 +19,7 @@ when 'centos'
   template 'php.ini' do
     path     '/etc/php.ini'
     owner    'root'
-    #notifies :restart, 'service[httpd]'
+    notifies :restart, 'service[httpd]'
   end
 
   # error_log の設置
