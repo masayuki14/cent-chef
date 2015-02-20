@@ -10,10 +10,10 @@
 %w[redis php-redis].each do |pkg|
   package pkg do
     action :install
-  end
 
-  if pkg == 'php-redis'
-    notifies :restart, 'service[httpd]'
+    if pkg == 'php-redis'
+      notifies :restart, 'service[httpd]'
+    end
   end
 end
 
