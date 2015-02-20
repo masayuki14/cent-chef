@@ -28,7 +28,8 @@
     "recipe[iptables]",
     "recipe[apache2]",
     "recipe[php]",
-    "recipe[php::zend_env]"
+    "recipe[php::zend_env]",
+    "recipe[redis]"
   ],
   "automatic": {
     "ipaddress": "vgchef"
