@@ -74,3 +74,11 @@ Trying provisioning by Vagrant and Chef.
 % cd chef-repo
 % bundle exec knife solo bootstrap vgchef
 ```
+
+
+# Install Links
+
+* https://www.vagrantup.com/downloads.html
+* https://www.virtualbox.org/wiki/Downloads
+* https://www.ruby-lang.org/ja/documentation/installation/
+* http://msysgit.github.io/
