@@ -9,4 +9,4 @@ source 'https://rubygems.org'
 #end
 
 gem 'knife-solo'
-#gem 'berkshelf'
+gem 'berkshelf'
