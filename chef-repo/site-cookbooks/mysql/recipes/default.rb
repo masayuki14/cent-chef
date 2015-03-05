@@ -35,3 +35,18 @@ end
 service 'mysqld' do
   action [ :enable, :start ]
 end
+
+# mysql root password 設定
+bash 'setup_mysqlserver_root' do
+  not_if "mysql -uroot -p#{node['mysql']['server_root_password']} -e 'show databases;'"
+  code "mysqladmin -u root password '#{node['mysql']['server_root_password']}'"
+end
+
+template 'my.cnf' do
+  path     '/etc/my.cnf'
+  owner    'root'
+  group    'root'
+  mode     0644
+  notifies :restart, 'service[mysqld]'
+end
+
