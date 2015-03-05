@@ -1,0 +1,8 @@
+# vi: syntax=sql ts=4 sw=4 sts=4 sr noet
+<%
+database = node['mysql']['hybrid']['database']
+user     = node['mysql']['hybrid']['user']
+password = node['mysql']['hybrid']['password']
+%>
+CREATE DATABASE IF NOT EXISTS `<%= database %>` DEFAULT CHARACTER SET utf8;
+GRANT ALL PRIVILEGES ON <%= database %>.* TO <%= user %>@localhost IDENTIFIED BY '<%= password %>';

@@ -50,3 +50,16 @@ template 'my.cnf' do
   notifies :restart, 'service[mysqld]'
 end
 
+
+template 'mysql-build.sql' do
+  path  '/tmp/mysql-build.sql'
+end
+
+bash 'mysql-build.sql' do
+  code "mysql -uroot -p#{node['mysql']['server_root_password']} < /tmp/mysql-build.sql"
+end
+
+file 'mysql-build.sql' do
+  path  '/tmp/mysql-build.sql'
+  action :delete
+end
