@@ -36,12 +36,6 @@ service 'mysqld' do
   action [ :enable, :start ]
 end
 
-# mysql root password 設定
-bash 'setup_mysqlserver_root' do
-  not_if "mysql -uroot -p#{node['mysql']['server_root_password']} -e 'show databases;'"
-  code "mysqladmin -u root password '#{node['mysql']['server_root_password']}'"
-end
-
 template 'my.cnf' do
   path     '/etc/my.cnf'
   owner    'root'
@@ -50,13 +44,13 @@ template 'my.cnf' do
   notifies :restart, 'service[mysqld]'
 end
 
-
+# 開発用のschema設定
 template 'mysql-build.sql' do
   path  '/tmp/mysql-build.sql'
 end
 
 bash 'mysql-build.sql' do
-  code "mysql -uroot -p#{node['mysql']['server_root_password']} < /tmp/mysql-build.sql"
+  code "mysql -uroot < /tmp/mysql-build.sql"
 end
 
 file 'mysql-build.sql' do
