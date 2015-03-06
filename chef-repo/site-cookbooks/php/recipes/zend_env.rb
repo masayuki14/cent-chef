@@ -23,8 +23,12 @@ end
 case node[:platform]
 when 'centos'
   # remiリポジトリから1.12をインストール
-  package 'php-ZendFramework' do
-    action :install
+  # 本体とPDO/Mysqlパッケージだけをインストールする
+  # すべてインストールする時は php-ZendFramework-full を指定
+  %w[php-ZendFramework php-ZendFramework-Db-Adapter-Pdo-Mysql].each do |pkg|
+    package pkg do
+      action :install
+    end
   end
 
 when 'ubuntu'
