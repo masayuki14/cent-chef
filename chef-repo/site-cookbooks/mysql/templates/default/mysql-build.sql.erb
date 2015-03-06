@@ -4,5 +4,29 @@ database = node['mysql']['hybrid']['database']
 user     = node['mysql']['hybrid']['user']
 password = node['mysql']['hybrid']['password']
 %>
+/* create schema */
 CREATE DATABASE IF NOT EXISTS `<%= database %>` DEFAULT CHARACTER SET utf8;
+
+/* create user */
 GRANT ALL PRIVILEGES ON <%= database %>.* TO <%= user %>@localhost IDENTIFIED BY '<%= password %>';
+
+/* create tables */
+USE dev_hybrid;
+
+CREATE TABLE IF NOT EXISTS `category_keyword` (
+	`category_id` smallint(5) unsigned NOT NULL,
+	`keyword` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+	`score` decimal(5,3) unsigned NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+
+CREATE TABLE IF NOT EXISTS `category` (
+	`category_id` smallint(5) unsigned NOT NULL,
+	`name` varchar(30) CHARACTER SET utf8mb4 NOT NULL,
+	`disp_order` smallint(5) unsigned NOT NULL,
+	`industry_type_id` smallint(5) unsigned NOT NULL,
+	`rep_id` int(11) DEFAULT NULL,
+	`advertiser_id` int(11) DEFAULT NULL,
+	`delete_flg` char(1) CHARACTER SET utf8mb4 NOT NULL,
+	PRIMARY KEY (`category_id`),
+	KEY `industry_type_id` (`industry_type_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
