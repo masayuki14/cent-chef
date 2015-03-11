@@ -32,27 +32,27 @@ end
 #end
 
 # iniファイルの作成
+dir = '/home/vagrant/repository/program/keywords/config'
 file 'config.ini' do
-  dir = '/home/vagrant/repository/program/keywords/app/config'
-  path    "#{dir}/config.ini"
-  content IO.read("#{dir}/config.ini.sample")
-  not_if  "test -f #{dir}/config.ini"
+  path    "#{dir}/database.ini"
+  content IO.read("#{dir}/database.ini.sample")
+  not_if  "test -f #{dir}/database.ini"
 end
 
 file 'redis.ini' do
-dir = '/home/vagrant/repository/program/keywords/htdocs/application/configs'
   path    "#{dir}/redis.ini"
   content IO.read("#{dir}/redis.ini.sample")
   not_if  "test -f #{dir}/redis.ini"
 end
 
 # Redisデータのビルド
-bash 'build_word_category.php' do
-  cwd  '/home/vagrant/repository/program/keywords/app/script'
-  code 'php build_word_category.php'
-end
-
-bash 'build_word_sets.php' do
-  cwd  '/home/vagrant/repository/program/keywords/app/script'
-  code 'php build_word_sets.php'
+build_dir = '/home/vagrant/repository/program/keywords/build'
+%w[build_catagory_for_db.php
+   build_category_keyword_for_db.php
+   build_word_score_for_redis.php
+   build_word_sets_for_redis.php].each do |script|
+  bash script do
+    cwd  build_dir
+    code "php #{script}"
+  end
 end
