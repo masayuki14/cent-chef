@@ -97,17 +97,20 @@ Chefってなに？
 初期化ではすべてEnter。
 
 ```sh
-# bundle コマンドがない場合は
+# bundleコマンドがない場合は
 % gem install bundler
 
+# bundleを使って knife-soloとberkshelfをインストールする
 % bundle install --path vendor/bundle
-
-# gemで直接インストールする場合
-# 必要に応じて sudo をつける
-% gem install knife-solo --pre
 
 # 続けてknifeの初期化
 % bundle exec knife configure
+
+# bundleを使わずgemで直接インストールする場合
+# 必要に応じて sudo をつける
+% gem install knife-solo --pre
+% gem install berkshelf
+% knife configure
 ```
 
 ### VM(ノード)にChefをインストール
@@ -129,7 +132,7 @@ VMにChefをインストールします。
 % bundle exec knife solo cook vgchef
 ```
 
-`bootstrap`を実行すると上記の`prepare` `cook` のどちらも実行してくれる。
+`bootstrap`を実行すると上記の`prepare` `cook` のどちらも実行してくれます。
 ```
 % cd chef-repo
 % bundle exec knife solo bootstrap vgchef
