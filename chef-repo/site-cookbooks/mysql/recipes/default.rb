@@ -23,7 +23,8 @@ yum_package 'postfix' do
   action  :upgrade
 end
 
-%w[mysql mysql-server php-mysql].each do |pkg|
+#%w[mysql mysql-server php-mysql].each do |pkg|
+%w[mysql mysql-server].each do |pkg|
   package pkg do
     action :install
     if pkg == 'php-mysql'
