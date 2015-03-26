@@ -3,14 +3,35 @@ Trying provisioning by Vagrant and Chef.
 
 # Setup
 
+## Preparing
+
+[Vagrant](https://www.vagrantup.com/downloads.html)
+[VirtualBox](https://www.virtualbox.org/wiki/Downloads) を事前にインストールしておいてください。  
+
+### for Windows
+
+[Ruby](http://rubyinstaller.org/)をインストールします。
+あわせて[DevelopmentKit](http://rubyinstaller.org/downloads/)もインストールしてください。  
+[Git](http://msysgit.github.io/)をインストールします。`OpenSSL`と`GitBASH`をインストールするようにします。
+
+### for Mac
+Macには標準でインストールされていますが[rvm](https://rvm.io/rvm/install)などを利用するのよいでしょう。
+
+
 ## Install vagrant plugin
+
+vagrantのpluginをインストールしますが、必須というわけでは有ります。あると便利です。[こちら](http://qiita.com/succi0303/items/e06bca7db5a0c3de96af)に解説があります。
+
 ```
 % vagrant plugin install sahara
 % vagrant plugin install vagrant-cachier
 % vagrant plugin install vagrant-omnibus
 ```
 
+
 ## Clone Repository
+
+開発環境のリポジトリをダウンロードします。gitで任意の場所にクローンして下さい。
 
 ```
 % git clone https://github.com/masayuki14/vagrant-chef.git ~/Machines/vagrant-chef
