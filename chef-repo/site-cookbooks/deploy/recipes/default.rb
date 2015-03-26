@@ -47,7 +47,7 @@ end
 
 # Redisデータのビルド
 build_dir = '/home/vagrant/repository/program/keywords/build'
-%w[build_catagory_for_db.php
+%w[build_category_for_db.php
    build_category_keyword_for_db.php
    build_word_score_for_redis.php
    build_word_sets_for_redis.php].each do |script|
